@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <a href="index.html"><img src="{{setting.logo.url}}"  alt="company logo here"></a>
+        </div>
+        <div class="navbar">
+            <ul id="MenuItems">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'category' %}">Products</a></li>
+                    {% if user.id is not None %}
+                        <li><a href="{% url 'user' %}"><img src="{{profile.image.url}}" alt="" style="border-radius: 30px; height: 50px;"></a></li>
+                        <li>
+                                <a href="{% url 'user' %}">Welcome!
+                                    {% if request.user.first_name %}
+                                        {{request.user.first_name}}
+                                    {% else %}
+                                        {{request.user.username}}
+                                    {% endif %}
+                                </a>
+                       </li>
+                           <li><a href="{% url 'logoutfunc' %}">Logout</li>
+                          <li><a href="">Change Password</li>
+                        {% else %}
+                        <li><a href="{% url 'About %}">About</a></li>
+                        <li><a href="{% url 'contact %}">Account Us</a></li>
+                        <li><a href="{% url 'accountform %}">Account</a></li>
+                    {% endif %}
+            </ul>

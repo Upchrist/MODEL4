@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+
+{% block title %} {{product.title}} Products {% endblock title %}
+
+{% block keywords %} {{product.keywords}} {% endblock keywords %}
+
+{% block description %} {{product.description}} {% endblock description %}
+    
+<!-- Header   -->
+{% block header %} {% include "prod-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+
+{% block content %}
+    <!-- Single  product details  -->
+
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{product.image.url}}" width="100%" id="ProductImg">
+                <div class="small-img-row"> 
+                    {% if images %}
+                        {% for item in images %}
+                            <div class="small-img-col">
+                                <img src="{{item.image.url}}" width="100%" class="SmallImg">
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-2">
+                <p>{{product.title}}</p>
+                <h1>{{product.description}}</h1>
+                <h4><span style="color: #ff523b;">{{product.available}}</span></h4>
+                <h4>
+                    {% if product.discount_price %}
+                        <del>${{product.price | floatformat:2 | intcomma}}</del>
+                        <span>${{ product.discount_price| floatformat:2 | intcomma }}</span>
+                    {% else %}
+                        <span>${{ product.price| floatformat:2 | intcomma }}</span>
+                    {% endif %} 
+                </h4>
+                <h4><strong>Available Sizes:</strong><span style="color: #ff523b;">{{product.sizes}}</span></h4>
+                <form  action="" method="POST">
+                    {% csrf_token %}
+                    <select name="size">
+                        <!-- <option>Select Size</option> -->
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                    <label>Qty:</label>
+                    <input type="number" name="quantity" value="1" min="{{product.minquantity}}" max="{{product.quantity_instock}}">
+                    <input type="submit" class="buttons" value="Add To Cart">
+                    <!-- <a href="" class="btn">Add To Cart</a> -->
+                    <input type="hidden" name="prodid" value="{{ product.id }}">
+                </form>
+                <h3>Product Details<i class="fa fa-indent"></i></h3>
+                <br>
+                <p>{{product.detail|safe}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- title  -->
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+            <a href="{% url 'category' %}"><p>View More</p></a>
+        </div>
+    </div>
+    <!-- products  -->
+    <div class="small-container">
+        <div class="row">
+            {% if products %}
+                {% for item in products %}
+                    <div class="col-4">
+                        <a href="{% url 'product_details' item.id item.slug %}"><img src="{{ item.image.url}}"></a>
+                        <a href="{% url 'product_details' item.id item.slug %}"><h4>{{item.title}}</h4></a>
+                        <a href="{% url 'product_details' item.id item.slug %}" class="category">{{item.category}}</a>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p class="price">
+                            {% if item.discount_price %}
+                                <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                                <span>#{{ item.discount_price | floatformat:2 | intcomma }}</span>
+                            {% else %}
+                                <span>#{{ item.price | floatformat:2 | intcomma}}</span>
+                            {% endif %} 
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div>
+        </div>
+    </div>
+</div>
+    <!-- product details end here  -->  
+    {% endblock content %}
+
+    <!-- footer   -->
+    {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+    <!-- footer done  -->

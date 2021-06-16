@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block title %} {{catdata.title}} Products {% endblock title %}
+
+{% block keywords %} {{catdata.keywords}} {% endblock keywords %}
+
+{% block description %} {{catdata.description}} {% endblock description %}
+
+    <!-- Header   -->
+    {% block header %} {% include "prod-header.html" %} {% endblock header %}
+    <!-- Header done  -->
+
+    {% block content %}
+    <!-- All products  -->
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All {{product.category}} Products</h2>
+        </div>
+        <div class="row">
+            {% if products %}
+                {% for item in products %}
+                    <div class="col-4">
+                        <a href="{% url 'product_details' item.id item.slug %}"><img src="{{ item.image.url}}"></a>
+                        <a href="{% url 'product_details' item.id item.slug %}"><h4>{{item.title}}</h4></a>
+                        <a href="{% url 'product_details' item.id item.slug %}" class="category">{{item.category}}</a>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p class="price">
+                            {% if item.discount_price %}
+                                <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                                <span>#{{ item.discount_price | floatformat:2 | intcomma }}</span>
+                            {% else %}
+                                <span>#{{ item.price | floatformat:2 | intcomma}}</span>
+                            {% endif %} 
+                        </p>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" class="span1" value="1">
+                            <button class="buttons" type="submit">Add to cart</button>
+                            <input type="hidden" name="prodid" value="{{ item.id }}">
+                        </form>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-buttons">
+            {% if products.has_other_pages %}
+                {% if products.has_previous %}
+                    <a href="?page={{products.previous_page_number}}">&laquo;</a>
+                {% else %}
+                    <span><a>&laquo;</a></span>
+                {% endif %}
+                {% for item in products.paginator.page_range %} 
+                    {% if products.number == item %}
+                        <span><a>{{item}}</a></span>
+                    {% else %}
+                        <span><a href="?page={{item}}">{{item}}</a></span>
+                    {% endif %}
+                {% endfor %}
+                {% if category.has_next %}
+                    <a href="?page={{products.next_page_number}}">&raquo;</a>
+                {% else %}
+                    <span><a>&raquo;</a></span>
+                {% endif %}   
+            {% endif %} 
+        </div>
+    </div>
+    <!-- All products end here  -->  
+    {% endblock content %}
+
+    <!-- footer   -->
+    {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+    <!-- footer done  -->

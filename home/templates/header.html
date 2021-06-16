@@ -1,0 +1,48 @@
+<div class="headermain">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html"><img src="{{setting.logo.url}}"  alt="company logo here"></a>
+            </div>
+            <div class="navbar">
+                <ul id="MenuItems">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'category' %}">Products</a></li>
+                        {% if user.id is not None %}
+                            <li><a href="{% url 'user' %}"><img src="{{profile.image.url}}" alt="" style="border-radius: 30px; height: 50px;"></a></li>
+                            <li>
+                                    <a href="{% url 'user' %}">Welcome!
+                                        {% if request.user.first_name %}
+                                            {{request.user.first_name}}
+                                        {% else %}
+                                            {{request.user.username}}
+                                        {% endif %}
+                                    </a>
+                           </li>
+                               <li><a href="{% url 'logoutfunc' %}">Logout</li>
+                              <li><a href="">Change Password</li>
+                            {% else %}
+                            <li><a href="{% url 'accountform' %}">Account</a></li>
+                        {% endif %}
+                </ul>
+            </div>
+            <a href="cart.html"><img src="{{setting.cart_icon.url}}" alt="shop cart" width="30px" height="30px"></a>
+            <img src="{{setting.menu_icon.url}}" class="menu-icon" onclick="menutoggle()">
+        </div>
+        <!-- banner area  -->
+        <div class="row">
+            <div class="col-2">
+                <h1>Give Your Work Some <br> Class And Style!</h1>
+                <p>“You can have anything you want if you want it badly enough. You can  <br>be anything
+                     you want to be, do anything you set out to accomplish <br>
+                      if you hold to that desire with singleness of purpose.”
+                </p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="images/ladies/1.jpg">
+            </div>
+        </div>
+        <!-- Banner area ends here  -->
+    </div>
+</div>

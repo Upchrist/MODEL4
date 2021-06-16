@@ -1,0 +1,13 @@
+<div class="brands">
+    <div class="small-container">
+        <div class="row">
+          {% if brands %}
+              {% for item in brands %}
+                  <div class="col-5">
+                      <img src="{{item.brands.url}}" >
+                    </div>
+                {% endfor %}
+           {% endif %}
+        </div>
+    </div>
+</div>

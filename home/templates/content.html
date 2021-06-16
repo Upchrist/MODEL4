@@ -1,0 +1,97 @@
+{% load humanize %}
+
+<!-- featured categories start here  -->
+<div class="categories">
+    <div class="small-container">
+        <div class="row">
+            {% if category %}
+                {% for item in category %}
+                    <div class="col-3">
+                        <a href="{% url 'product_list' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                    </div>
+                {% endfor %}
+           {% endif %}
+        </div>
+    </div>
+<!-- featured categories ends here  -->
+
+<!-- featured products and latest products -->
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            {% if featured %}
+                {% for item in featured %}
+                    <div class="col-4">
+                        <a href="{% url 'product_details' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                        <a href="product-details.html"><h4>Brown Shifon Gown</h4></a>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p class="price">
+                        {% if item.discount_price %}
+                            <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                            <span>#{{item.dscount_price | floatformat:2 | intcomma}}</span>
+                            {% else %}
+                            <span>#{{item.price | floatformat:2 | intcomma}}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+            {% if latest %}
+                {% for item in latest %}
+                    <div class="col-4">
+                        <a href="{% url 'product_details' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                        <a href="product-details.html item.id item.slug %"><h4>{{item.title}}</h4></a>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p class="price">
+                            {% if item.discount_price %}
+                            <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                            <span>#{{item.dscount_price | floatformat:2 | intcomma}}</span>
+                            {% else %}
+                            <span>#{{item.price | floatformat:2 | intcomma}}</span>
+                            {% endif %}
+                        </p>     
+                    </div>
+                {% endfor %}
+            {% endif %}    
+        </div>
+        <div class="row">
+            {% if latest2 %}
+                {% for item in latest2 %}
+                    <div class="col-4">
+                        <a href="{% url 'product_details' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                        <a href="product-details.html item.id item.slug %"><h4>{{item.title}}</h4></a>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p class="price">
+                            {% if item.discount_price %}
+                            <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                            <span>#{{item.dscount_price | floatformat:2 | intcomma}}</span>
+                            {% else %}
+                            <span>#{{item.price | floatformat:2 | intcomma}}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}   
+        </div>
+    </div>

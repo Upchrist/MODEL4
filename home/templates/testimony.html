@@ -1,0 +1,25 @@
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            {% if testimo %}
+                {% for item in testimo %}
+                      <div class="col-3">
+                             <i class="fa fa-quote-left"></i>
+                             <p>What I ordered is exactly what I got. Thank You Alist Store</p>
+                             <p>{{item.comment}}</p>
+                              <div class="rating">
+                                   <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                     <i class="fa fa-star-o"></i>
+                                </div>
+                                   <img src="{{item.testimos.url}}" alt="">
+                                   <h3>{{item.name}}</h3>
+                       </div>
+                {% endfor %}
+            {% endif %}
+           
+        </div>
+    </div>
+</div>

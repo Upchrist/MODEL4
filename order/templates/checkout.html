@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} Home| Checkout {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+
+
+
+<!-- Header and banner combined  -->
+{% block header %} {% include "acheader.html" %} {% endblock header %}
+<!-- Header and banner done  -->
+
+{% block content %}
+     <!-- Account Page  -->
+     <div class="checkout-page" style="padding: 50px 0;">
+        <h2 class="title">Checkout Page</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-container" style="height: 520px;">
+                        <div class="form-buttons">
+                            <h4 class="title"> <strong>Order</strong>Details</h4> 
+                        </div>
+                        
+                        <form action="{% url 'order:placeorder' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" value="{{profile.first_name" placeholder="first_name">
+                            <input type="text" value="profile.last_name" placeholder="last_name">
+                            <input type="text" value="profile.phone" placeholder="Phone Number">
+                            <input type="text" value="profile.address" placeholder="Address">
+                            <input type="text" value="profile.state" placeholder="State">
+                            <input type="text" value="profile.country" placeholder="Country">
+                            <input type="hidden" name="amount" value="{{total}}">
+                            <input type="hidden" name="order_number" value="{{order_code}}">
+                            <button type="submit" class="buttons">Proceed To Order</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="small-container cart-page" style="height: 520px; width: 520px;">
+                        <div class="form-btn">
+                    {% if message %}
+                       {% for message in messages %}
+                          <div class="alert alert-success alert-{{message.tag" role="alert">
+                              <button type="button" class="close" data-dimiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                              {{message}}
+                          </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <h4 class="title" style="text-align: center;">Delievery Details</h4>
+                    <table>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Size</th>
+                            <th>Amount</th>
+                        </tr>
+                        (% if shopcart %)
+                           (% for item in shopcart %)
+                
+                
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="{{item.product.title}}">
+                                    <div>
+                                        <p>{{item.product.title}}</p>
+                                    </div>
+                                </div>    
+                            </td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.size}}</td>
+                            <td>{{item.amount | floatformat:2 | intcomma}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </table>
+                    <div class="total-price">
+                        <table>
+                          <tr>
+                              <td>Total</td>
+                              <td>{{total | floatformat:2 | intcomma</td>
+                          </tr>
+                        </table>
+                      </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Account Page Done  -->
+
+   {% endblock content %} 

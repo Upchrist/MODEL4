@@ -1,0 +1,48 @@
+<div class="headermain">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{{setting.logo.url}}" alt="company logo here"></a>
+            </div>
+            <div class="navbar">
+                <ul id="MenuItems">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'category' %}">Products</a></li>
+                    {% if user.id is not None %}                   
+                        <li><a href=""><img src="{{profile.image.url}}" alt="" style="border-radius: 30px; height:40px"></a></li>
+                        <li>                           
+                           welcome!<a href="">
+                                {% if request.user.first_name %}
+                                    <p><strong> {{request.user.first_name}}</strong></p>    
+                                {% else %}
+                                    <p><strong>{{request.user.username}}</strong></p>
+                                {% endif %}
+                           </a>
+                        <li><a href="">Logout</a></li>
+                        <li><a href="">Change Password</a></li>
+                    {% else %}
+                        <li><a href="">Account</a></li> 
+                    {% endif %}	
+                </ul>
+            </div>
+            <a href=""><img src="{{setting.cart_icon.url}}" alt="shop cart" width="30px" height="30px">
+                {% if itemcount > 0 %}
+                    <span class="badge red z-depth-1 mr-1">{{ itemcount }}</span>
+                {% else %}
+                    <span class="badge red z-depth-1 mr-1">0</span>
+                {% endif %}              
+            </a>
+            <img src="{{setting.menu_icon.url}}" class="menu-icon" onclick="menutoggle()">
+        </div>
+        {% if messages %}
+            {% for message in messages  %}
+                <div style="width: 400px;" class="alert alert-{{message.tags}}" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>													
+                    {{ message }}
+                </div>									  
+            {% endfor %}								  
+        {% endif %}	
+    </div>
+</div>

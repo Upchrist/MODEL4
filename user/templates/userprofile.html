@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} Home| {{user.first_name}} Profile {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+
+
+
+<!-- Header and banner combined  -->
+{% block header %} {% include "prod-header.html" %} {% endblock header %}
+<!-- Header and banner done  -->
+
+{% block content %}
+     <!-- Account Page  -->
+     <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <h2 class="title"> <strong>User</strong>Panel</h2>
+                    <ul class="panel">
+                        <li><a class="buttons" href="{% url 'index' %}">Home</a></li>
+                        <li><a class="buttons" href="{% url 'user' %}">My Account</a></li>
+                        <li><a class="buttons" href="{% url 'user' %}">My Account</a></li>
+                        <li><a class="buttons" href="{% url 'userupdate' %}">Update Profile</a></li>
+                        <li><a class="buttons" href="{% url 'userpassword' %}">Change Password</a></li>
+                        <li><a class="buttons" href="{% url 'logoutfunc' %}">Logout</a></li>                      
+                    </ul>
+                </div>
+
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-buttons">
+                            <h2 style="margin-top: 20px;" class="title"><strong>User</strong>Profile</h2>
+                        </div>
+                        <div class="details">
+                            <img src="{{profile.image.url}}" alt="" style="border-radius: 30px; height: 180;">
+                            <div>
+                                <p>First Name:  {{profile.first_name</p>
+                                <p>Last Name:  {{profile.last_name</p>
+                                <p>Email:  {{profile.user.email</p>
+                                <p>Phone:  {{profile.phone</p>
+                                <p>Address:  {{profile.address</p>
+                                <p>City:  {{profile.city</p>
+                                <p>State:  {{profile.state</p>
+                                <p>Country:  {{profile.country</p>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Account Page Done  -->
+
+   {% endblock content%} 

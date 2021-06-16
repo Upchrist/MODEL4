@@ -1,0 +1,20 @@
+<!-- Header   -->
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <a href="index.html"><img src="{{setting.icon.url}}" alt="company logo here"></a>
+        </div>
+        <div class="navbar">
+            <ul id="MenuItems">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'category' %}">Products</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'accountform' %}">Account</a></li>
+            </ul>
+        </div>
+        <a href=""><img src="{{setting.cart_icon.url}}" alt="shop cart" width="30px" height="30px"></a>
+        <img src="{{setting.menu_icon.url}}" class="menu-icon" onclick="menutoggle()">
+    </div>
+</div>
+<!-- Header done  -->

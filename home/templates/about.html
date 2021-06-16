@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} About Us {{setting.title}} {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+
+
+<!-- Header and banner combined  -->
+{% block header %} {% include "acheader.html" %} {% endblock header %}
+<!-- Header and banner done  -->
+
+
+
+
+{% block content %}
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                {{setting.about|safe}}
+            </div>
+            <div class="col-2">
+                {{setting.about2|safe}}
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Account Page Done  -->
+{% endblock content %}
+
+
+<!-- footer  -->
+{% block footer %} {% include "footer.html" %} {% endblock footer %}
+<!-- footer ends here  -->

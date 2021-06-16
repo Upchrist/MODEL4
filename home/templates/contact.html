@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} Contact Us {{setting.title}} {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+
+
+<!-- Header and banner combined  -->
+{% block header %} {% include "acheader.html" %} {% endblock header %}
+<!-- Header and banner done  -->
+
+ 
+ 
+ 
+ 
+{% block content %}
+ 
+ <!-- Account Page  -->
+ <div class="account-page">
+    <div class="container">
+        <h2 class="title"><strong>Contact</strong>Us</h2>
+        <div class="row">
+            <div class="col-2" style="padding-top: 50px;">
+                {{setting.contact|safe}}
+            </div>
+            <div class="col-2">
+                <div class="form-container" style="height: 530px;">
+                    <h2 class="title"><strong>Contact</strong>Form</h2>                   
+                    <form id="RegForm"  action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="text" placeholder="Username" name="name">
+                        <input type="email" placeholder="Email" name="email">
+                        <input type="text" placeholder="Subject" name="subject">
+                        <textarea name="message" id="" cols="20" rows="10"></textarea>
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endblock content%} 
